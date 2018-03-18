@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import React from 'react';
 
-import StorePicker from './StorePicker';
-import App from './App';
-import NotFound from './NotFound';
+import StorePicker from './StorePicker.jsx';
+import App from './App.jsx';
+import NotFound from './NotFound.jsx';
 
 const Router = () => (
     <BrowserRouter>
@@ -13,6 +13,6 @@ const Router = () => (
             <Route component={NotFound} />
         </Switch>
     </BrowserRouter>
-)
+);
 
 export default Router;

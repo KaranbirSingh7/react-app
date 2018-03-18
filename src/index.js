@@ -5,7 +5,7 @@ import {
 
 // Local components here
 import Router from './components/Router.jsx';
-import App from './components/App.jsx';
+// import App from './components/App.jsx';
 
 import './css/style.css';
 

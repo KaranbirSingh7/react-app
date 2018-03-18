@@ -1,6 +1,7 @@
 import React from 'react';
 
 class AddFishForm extends React.Component {
+
     createFish = e => {
         e.preventDefault();
         const name = e.target.elements.name.value;
@@ -8,11 +9,11 @@ class AddFishForm extends React.Component {
         const status = e.target.elements.status.value;
         const desc = e.target.elements.desc.value;
         const image = e.target.elements.image.value;
+        const fish = { name, price, status, desc, image };
 
-        const fish = { name, price, status, desc, image }
-
-        console.table(fish);
-    }
+        this.props.addFish(fish);
+        e.currentTarget.reset();
+    };
 
     render() {
         return (
@@ -25,9 +26,9 @@ class AddFishForm extends React.Component {
                 </select>
                 <textarea name="desc" placeholder="Desc" />
                 <input type="text" name="image" placeholder="Image" />
-                <input type="submit" value="+Add Fish" />
+                <button type="submit">+Add Fish</button>
             </form >
-        )
+        );
     }
 }
 

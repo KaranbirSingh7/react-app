@@ -25,7 +25,7 @@ class StorePicker extends React.Component {
 					<input type="submit" value="Visit Store" />
 				</form>
 			</Fragment>
-		)
+		);
 	}
 }
 
