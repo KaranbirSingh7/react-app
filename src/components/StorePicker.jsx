@@ -1,9 +1,14 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
 import { getFunName } from '../helpers';
 
-
 class StorePicker extends React.Component {
-	// Handle form submission
+
+	static propTypes = {
+		history: PropTypes.object
+	}
+
 	handleSubmit = e => {
 		e.preventDefault();
 		const storeName = e.target.elements.storeName.value;
@@ -22,7 +27,7 @@ class StorePicker extends React.Component {
 						placeholder="Store Name"
 						defaultValue={getFunName()}
 					/>
-					<input type="submit" value="Visit Store" />
+					<button type="submit">Visit Store</button>
 				</form>
 			</Fragment>
 		);

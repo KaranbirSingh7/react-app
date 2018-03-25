@@ -1,21 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import { formatPrice } from '../helpers';
 
 class Order extends React.Component {
+    static propTypes = {
+        fishes: PropTypes.object,
+        order: PropTypes.object,
+        deleteOrder: PropTypes.func,
+    }
 
     renderOrder = key => {
         const fish = this.props.fishes[key];
         const count = this.props.order[key];
-        const isAvailable = fish.status === 'available';
+        const isAvailable = fish && fish.status === 'available';
+
+        if (!fish) return null;
+
         if (!isAvailable) {
-            return <li>
-                Sorry {fish ? fish.name : 'fish'} is not available
-            </li>
+            return <li key={key}>Sorry {fish ? fish.name : 'fish'} is not available</li>
         }
-        return <li>
-            {count} lbs  {fish.name}
-            {formatPrice(count * fish.price)}
-        </li>
+        return (
+            <CSSTransition
+                classNames="order"
+                key={key}
+                timeout={{ enter: 250, exit: 250 }}
+            >
+                <li key={key}>
+                    {count} lbs  {fish.name}
+                    {formatPrice(count * fish.price)}
+                    <button onClick={() => this.props.deleteOrder(key)}>
+                        &times;
+                </button>
+                </li>
+            </CSSTransition>
+        )
     }
 
     render() {
@@ -33,11 +53,13 @@ class Order extends React.Component {
         return (
             <div className="order-wrap">
                 <h2>Order</h2>
-                <ul>
+
+                <TransitionGroup component="ul" className="order">
                     {orderIds.map(this.renderOrder)}
-                </ul>
+                </TransitionGroup>
+
                 <div className="total">
-                    Total
+                    Total:
                     <strong>{formatPrice(total)}</strong>
                 </div>
             </div>
